@@ -11,6 +11,6 @@ export type Game = {
     away_team: Team;
     home_goals: number;
     away_goals: number;
-    date: string; // por seguranca deixe stringado
+    date: string; // por seguranca deixei stringado
     venue: Venue;
 }
