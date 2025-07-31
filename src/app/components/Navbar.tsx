@@ -5,15 +5,26 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
+        <Link className="navbar-brand fw-bold fs-4" href="/">
+          BetStats
+        </Link>
 
-        <div className="d-flex align-items-center gap-4">
-          <Link className="navbar-brand" href="/">
-            BetStats
-          </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          <ul className="navbar-nav flex-row gap-3">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-lg-center gap-lg-3">
             <li className="nav-item">
               <Link className="nav-link" href="/players">
                 Jogadores
@@ -24,13 +35,18 @@ export default function Navbar() {
                 Times
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" href="/plans">
+                Planos
+              </Link>
+            </li>
           </ul>
-        </div>
 
-        <div className="d-flex align-items-center ms-auto">
-          <Link href="/conta" className="nav-link text-white">
-            <i className="bi bi-person-circle fs-4"></i>
-          </Link>
+          <div className="d-flex">
+            <Link href="/account" className="nav-link text-white">
+              <i className="bi bi-person-circle fs-4"></i>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

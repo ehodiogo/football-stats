@@ -6,27 +6,27 @@ import Image from "next/image";
 import { Player } from "@/types/Player";
 import { PlayerStatistic } from "@/types/PlayerStatistic";
 import {
-  Star,
+  RectangleVertical,
   Clock,
-  Goal,
-  Shield,
-  AlertCircle,
-  ArrowUpRight,
+  FlagOff,
+  Star,
+  Users,
+  TrendingUp,
+  Dumbbell,
+  ShieldBan,
+  Joystick,
+  AlertTriangle,
+  Hand,
   Target,
-  HandMetal,
-  Flag,
-  BadgeX,
-  BadgeCheck,
-  Ban,
-  Frown,
-  CornerDownRight,
-  SquareStack,
-  Undo2,
-  MoveUpRight,
-  ActivitySquare,
-  Dribbble,
+  XCircle,
+  Shield,
+  Ban
 } from "lucide-react";
-import Stat from "@/app/functions/stat";
+import { FaPeoplePulling } from "react-icons/fa6";
+import { GiGoalKeeper, GiSoccerKick, GiSoccerBall, } from "react-icons/gi";
+import StatProgression from "@/app/functions/statProgression";
+import PlayerCard from "@/app/components/PlayerCard";
+import Link from "next/link";
 
 export default function PlayerDetailPage() {
   const params = useParams();
@@ -71,229 +71,306 @@ export default function PlayerDetailPage() {
       <p className="text-center mt-10 text-gray-500">Jogador não encontrado.</p>
     );
 
+  const yellowCardProgression = statistics?.map((s) => s.yellow_card) || [];
+  const redCardProgression = statistics?.map((s) => s.red_card) || [];
+  const minPlayedCardProgression = statistics?.map((s) => s.min_played) || [];
+  const offsidesCardProgression = statistics?.map((s) => s.offsides) || [];
+  const ratingCardProgression = statistics?.map((s) => s.rating) || [];
+  const shotsCardProgression = statistics?.map((s) => s.shots) || [];
+  const shotsOnGoalCardProgression = statistics?.map((s) => s.shots_on_goal) || [];
+  const goalsCardProgression = statistics?.map((s) => s.goals) || [];
+  const goalsConcedeedCardProgression = statistics?.map((s) => s.goals_conceded) || [];
+  const assistsCardProgression = statistics?.map((s) => s.assists) || [];
+  const savesCardProgression = statistics?.map((s) => s.saves) || [];
+  const passesCardProgression = statistics?.map((s) => s.passes) || [];
+  const accuracyCardProgression = statistics?.map((s) => s.accuracy) || [];
+  const duelsCardProgression = statistics?.map((s) => s.duels) || [];
+  const duelsWonCardProgression = statistics?.map((s) => s.duels_won) || [];
+  const tacklesCardProgression = statistics?.map((s) => s.tackles) || [];
+  const blocksCardProgression = statistics?.map((s) => s.blocks) || [];
+  const interceptionsCardProgression = statistics?.map((s) => s.interceptions) || [];
+  const dribblesAttemptCardProgression = statistics?.map((s) => s.dribbles_attempts) || [];
+  const dribblesSuccessCardProgression = statistics?.map((s) => s.dribbles_success) || [];
+  const dribblesPastCardProgression = statistics?.map((s) => s.dribbles_past) || [];
+  const foulsDrownCardProgression = statistics?.map((s) => s.fouls_drown) || [];
+  const foulsComittedCardProgression = statistics?.map((s) => s.fouls_committed) || [];
+  const penaltyWonCardProgression = statistics?.map((s) => s.penalty_won) || [];
+  const penaltyCommittedCardProgression = statistics?.map((s) => s.penalty_committed) || [];
+  const penaltyScoredCardProgression = statistics?.map((s) => s.penalty_scored) || [];
+  const penaltyMissedCardProgression = statistics?.map((s) => s.penalty_missed) || [];
+  const penaltySavedCardProgression = statistics?.map((s) => s.penalty_saved) || [];
+
   return (
     <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
-        {player.name}
-      </h1>
+      <PlayerCard player={player} />
 
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg w-48 h-48 mx-auto md:mx-0">
-          <Image
-            src={player.photo_url}
-            alt={`Foto de ${player.name}`}
-            width={192}
-            height={192}
-            className="object-cover"
-            priority
-          />
-        </div>
+      <section className="mt-4">
+        <h2 className="h4 mb-3 text-center">Times Anteriores</h2>
 
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-            Time Atual
-          </h2>
-          <div className="flex items-center gap-4 bg-gray-100 rounded-lg p-4 shadow-inner">
-            <Image
-              src={player.actual_team.photo_url}
-              alt={`Logo do ${player.actual_team.name}`}
-              width={64}
-              height={64}
-              className="object-contain"
-            />
-            <span className="text-xl font-semibold text-gray-900">
-              {player.actual_team.name}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-700 text-center md:text-left">
-          Times Anteriores
-        </h2>
         {player.last_teams.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {player.last_teams.map((team) => (
-              <div
-                key={team.id}
-                className="flex flex-col items-center gap-2 p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                title={team.name}
-              >
-                <Image
-                  src={team.photo_url}
-                  alt={`Logo do ${team.name}`}
-                  width={80}
-                  height={80}
-                  className="object-contain"
-                />
-                <span className="text-gray-800 font-medium text-center">
-                  {team.name}
-                </span>
-              </div>
-            ))}
+          <div className="d-flex justify-content-center">
+            <div
+              className="d-flex overflow-auto"
+              style={{ gap: "1rem", padding: "0.5rem 0", maxWidth: "100%" }}
+            >
+              {player.last_teams.map((team) => (
+                <Link
+                  key={team.id}
+                  href={`/team/${team.id}`}
+                  passHref
+                  className="text-decoration-none"
+                >
+                  <div
+                    className="flex-shrink-0 bg-light rounded shadow-sm d-flex align-items-center justify-content-center"
+                    title={team.name}
+                    style={{ width: 80, height: 80, cursor: "pointer" }}
+                  >
+                    <Image
+                      src={team.photo_url}
+                      alt={`Logo do ${team.name}`}
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                      unoptimized={true}
+                    />
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         ) : (
-          <p className="text-center text-gray-500 italic">
+          <p className="text-center fst-italic text-muted">
             Sem times anteriores registrados.
           </p>
         )}
       </section>
 
-      {statistics &&
-        statistics.map((statistic) => (
-          <div
-            key={statistic.id}
-            className="bg-white p-5 rounded-xl shadow border border-gray-200 space-y-3"
-          >
-            <h3 className="text-center text-lg font-semibold text-gray-800 mb-3">
-              Estatísticas da Partida {statistic.game.home_team.name} X {statistic.game.away_team.name} 
-            </h3>
+      <h2 className="mt-4 h4 mb-3 text-center">Últimas Partidas do Jogador</h2>
+      {statistics && (
+        <div className="d-flex flex-wrap justify-content-center gap-3">
+          {statistics.map((statistic) => (
+            <div
+              key={statistic.id}
+              className="bg-light rounded border shadow-sm px-4 py-3 d-flex align-items-center justify-content-center"
+              style={{
+                minWidth: 200,
+                maxWidth: 200,
+                flexDirection: "row",
+                gap: "0.75rem",
+              }}
+            >
+              <Link
+                href={`/team/${statistic.game.home_team.id}`}
+                className="text-decoration-none text-center d-flex flex-column align-items-center"
+              >
+                <Image
+                  src={statistic.game.home_team.photo_url}
+                  alt={statistic.game.home_team.name}
+                  width={40}
+                  height={40}
+                  style={{ objectFit: "contain" }}
+                />
+                <small className="text-muted">
+                  {statistic.game.home_team.name}
+                </small>
+              </Link>
 
-            <div className="grid grid-cols-1 gap-2">
-              <Stat
-                label="Tempo de Jogo"
-                value={`${statistic.min_played} min`}
-                icon={<Clock className="text-blue-600" />}
-              />
-              <Stat
-                label="Rating"
-                value={`${statistic.rating}/10`}
-                icon={<Star className="text-yellow-500" />}
-              />
-              <Stat
-                label="Impedimentos"
-                value={statistic.offsides}
-                icon={<AlertCircle className="text-orange-600" />}
-              />
-              <Stat
-                label="Chutes"
-                value={statistic.shots}
-                icon={<Target className="text-red-600" />}
-              />
-              <Stat
-                label="Chutes a Gol"
-                value={statistic.shots_on_goal}
-                icon={<ArrowUpRight className="text-red-400" />}
-              />
-              <Stat
-                label="Gols"
-                value={statistic.goals}
-                icon={<Goal className="text-green-600" />}
-              />
-              <Stat
-                label="Gols Concedidos"
-                value={statistic.goals_conceded}
-                icon={<Frown className="text-rose-600" />}
-              />
-              <Stat
-                label="Assistências"
-                value={statistic.assists}
-                icon={<ArrowUpRight className="text-emerald-500" />}
-              />
-              <Stat
-                label="Defesas"
-                value={statistic.saves}
-                icon={<Shield className="text-sky-700" />}
-              />
-              <Stat
-                label="Passes"
-                value={statistic.passes}
-                icon={<Dribbble className="text-indigo-500" />}
-              />
-              <Stat
-                label="Precisão de Passes"
-                value={`${statistic.accuracy}%`}
-                icon={<ActivitySquare className="text-blue-500" />}
-              />
-              <Stat
-                label="Duelos"
-                value={statistic.duels}
-                icon={<MoveUpRight className="text-gray-600" />}
-              />
-              <Stat
-                label="Duelos Ganhos"
-                value={statistic.duels_won}
-                icon={<BadgeCheck className="text-green-500" />}
-              />
-              <Stat
-                label="Desarmes"
-                value={statistic.tackles}
-                icon={<Shield className="text-gray-800" />}
-              />
-              <Stat
-                label="Bloqueios"
-                value={statistic.blocks}
-                icon={<SquareStack className="text-purple-600" />}
-              />
-              <Stat
-                label="Interceptações"
-                value={statistic.interceptions}
-                icon={<CornerDownRight className="text-teal-500" />}
-              />
-              <Stat
-                label="Dribles Tentados"
-                value={statistic.dribbles_attempts}
-                icon={<Dribbble className="text-fuchsia-600" />}
-              />
-              <Stat
-                label="Dribles Completos"
-                value={statistic.dribbles_success}
-                icon={<Dribbble className="text-green-600" />}
-              />
-              <Stat
-                label="Dribles Sofridos"
-                value={statistic.dribbles_past}
-                icon={<Dribbble className="text-rose-400" />}
-              />
-              <Stat
-                label="Faltas Recebidas"
-                value={statistic.fouls_drown}
-                icon={<Flag className="text-green-600" />}
-              />
-              <Stat
-                label="Faltas Cometidas"
-                value={statistic.fouls_committed}
-                icon={<Flag className="text-red-600" />}
-              />
-              <Stat
-                label="Cartões Amarelos"
-                value={statistic.yellow_card}
-                icon={<AlertCircle className="text-yellow-400" />}
-              />
-              <Stat
-                label="Cartões Vermelhos"
-                value={statistic.red_card}
-                icon={<Ban className="text-red-700" />}
-              />
-              <Stat
-                label="Pênaltis Sofridos"
-                value={statistic.penalty_won}
-                icon={<HandMetal className="text-green-600" />}
-              />
-              <Stat
-                label="Pênaltis Cometidos"
-                value={statistic.penalty_committed}
-                icon={<HandMetal className="text-red-600" />}
-              />
-              <Stat
-                label="Pênaltis Convertidos"
-                value={statistic.penalty_scored}
-                icon={<Goal className="text-green-700" />}
-              />
-              <Stat
-                label="Pênaltis Perdidos"
-                value={statistic.penalty_missed}
-                icon={<BadgeX className="text-gray-500" />}
-              />
-              <Stat
-                label="Pênaltis Defendidos"
-                value={statistic.penalty_saved}
-                icon={<Undo2 className="text-blue-700" />}
-              />
+              <div className="fw-bold fs-5 text-secondary">X</div>
+
+              <Link
+                href={`/team/${statistic.game.away_team.id}`}
+                className="text-decoration-none text-center d-flex flex-column align-items-center"
+              >
+                <Image
+                  src={statistic.game.away_team.photo_url}
+                  alt={statistic.game.away_team.name}
+                  width={40}
+                  height={40}
+                  style={{ objectFit: "contain" }}
+                />
+                <small className="text-muted">
+                  {statistic.game.away_team.name}
+                </small>
+              </Link>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      )}
+
+      <h2 className="h4 mb-3 text-center mt-3">
+        Progressão das Estatísticas do Jogador
+      </h2>
+      <div className="d-flex flex-wrap justify-content-center gap-2">
+        <StatProgression
+          title="Cartões Amarelos"
+          data={yellowCardProgression}
+          icon={<RectangleVertical fill="yellow" color="yellow" />}
+        />
+
+        <StatProgression
+          title="Cartões Vermelhos"
+          data={redCardProgression}
+          icon={<RectangleVertical fill="red" color="red" />}
+        />
+
+        <StatProgression
+          title="Tempo de Jogo"
+          data={minPlayedCardProgression}
+          label="min"
+          icon={<Clock />}
+        />
+
+        <StatProgression
+          title="Impedimentos"
+          data={offsidesCardProgression}
+          icon={<FlagOff fill="orange" />}
+        />
+
+        <StatProgression
+          title="Rating"
+          data={ratingCardProgression}
+          icon={<Star fill="yellow" />}
+        />
+
+        <StatProgression
+          title="Chutes"
+          data={shotsCardProgression}
+          icon={<GiSoccerKick fill="gray" />}
+        />
+
+        <StatProgression
+          title="Chutes a Gol"
+          data={shotsOnGoalCardProgression}
+          icon={<GiSoccerKick fill="green" />}
+        />
+
+        <StatProgression
+          title="Gols"
+          data={goalsCardProgression}
+          icon={<GiSoccerBall fill="green" />}
+        />
+
+        <StatProgression
+          title="Gols Tomados"
+          data={goalsConcedeedCardProgression}
+          icon={<GiSoccerBall fill="red" />}
+        />
+
+        <StatProgression
+          title="Assistências"
+          data={assistsCardProgression}
+          icon={<Users fill="yellow" />}
+        />
+
+        <StatProgression
+          title="Defesas"
+          data={savesCardProgression}
+          icon={<GiGoalKeeper fill="blue" />}
+        />
+
+        <StatProgression
+          title="Passes"
+          data={passesCardProgression}
+          icon={<GiSoccerKick fill="blue" />}
+        />
+
+        <StatProgression
+          title="Precisão Passes"
+          data={accuracyCardProgression}
+          label="%"
+          icon={<TrendingUp fill="blue" />}
+        />
+
+        <StatProgression
+          title="Duelos"
+          data={duelsCardProgression}
+          icon={<Dumbbell />}
+        />
+
+        <StatProgression
+          title="Duelos Ganhos"
+          data={duelsWonCardProgression}
+          icon={<Dumbbell fill="green" />}
+        />
+
+        <StatProgression
+          title="Desarmes"
+          data={tacklesCardProgression}
+          icon={<FaPeoplePulling />}
+        />
+
+        <StatProgression
+          title="Bloqueios"
+          data={blocksCardProgression}
+          icon={<Ban />}
+        />
+
+        <StatProgression
+          title="Interceptações"
+          data={interceptionsCardProgression}
+          icon={<ShieldBan />}
+        />
+
+        <StatProgression
+          title="Dribles Tentados"
+          data={dribblesAttemptCardProgression}
+          icon={<Joystick color="yellow" />}
+        />
+
+        <StatProgression
+          title="Dribles Efetuados"
+          data={dribblesSuccessCardProgression}
+          icon={<Joystick color="green" />}
+        />
+
+        <StatProgression
+          title="Dribles Recebidos"
+          data={dribblesPastCardProgression}
+          icon={<Joystick color="red" />}
+        />
+
+        <StatProgression
+          title="Faltas Recebidas"
+          data={foulsDrownCardProgression}
+          icon={<AlertTriangle color="yellow" />}
+        />
+
+        <StatProgression
+          title="Faltas Cometidas"
+          data={foulsComittedCardProgression}
+          icon={<ShieldBan color="red" />}
+        />
+
+        <StatProgression
+          title="Pênalti Recebido"
+          data={penaltyWonCardProgression}
+          icon={<Hand />}
+        />
+
+        <StatProgression
+          title="Pênalti Cometido"
+          data={penaltyCommittedCardProgression}
+          icon={<AlertTriangle color="red" />}
+        />
+
+        <StatProgression
+          title="Pênalti Marcado"
+          data={penaltyScoredCardProgression}
+          icon={<Target color="green" />}
+        />
+
+        <StatProgression
+          title="Pênalti Perdido"
+          data={penaltyMissedCardProgression}
+          icon={<XCircle color="red" />}
+        />
+
+        <StatProgression
+          title="Pênalti Defendido"
+          data={penaltySavedCardProgression}
+          icon={<Shield color="blue" />}
+        />
+      </div>
     </div>
   );
 }
