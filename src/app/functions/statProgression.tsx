@@ -19,8 +19,11 @@ function StatProgression({
       : null;
 
   return (
-    <div className="my-4 p-3 bg-light rounded shadow" style={{ minWidth: 100 }}>
-      <h2 className="h5 d-flex align-items-center gap-2 mb-3">
+    <div
+      className="my-4 p-3 rounded shadow"
+      style={{ minWidth: 100, backgroundColor: "#272C32" }}
+    >
+      <h2 className="h5 d-flex align-items-center gap-2 mb-3 barlow-condensed-regular-white">
         {icon && <span className="fs-4">{icon}</span>}
         {title}
       </h2>
@@ -57,7 +60,7 @@ function StatProgression({
       </div>
 
       {average !== null && (
-        <div className="text-center text-muted small mt-1">
+        <div className="text-center small mt-1 barlow-condensed-regular-white">
           Média: {average} {label || ""}
         </div>
       )}

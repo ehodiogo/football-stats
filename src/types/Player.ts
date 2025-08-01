@@ -9,4 +9,8 @@ export type Player = {
     nationality: string;
     position: string;
     number: number;
+    birth_date: string;
+    birth_place: string;
+    height: string;
+    weight: string;
 }

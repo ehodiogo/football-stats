@@ -4,12 +4,10 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Team } from "@/types/Team";
 import { TeamStatistics } from "@/types/TeamStatistics";
-import Link from "next/link";
-import Image from "next/image";
 import TeamCard from "@/app/components/TeamCard";
-import StatProgression from "@/app/functions/statProgression";
-import { GiGoalKeeper, GiSoccerKick } from "react-icons/gi";
-import { Ban, Inbox, Box, AlertTriangle, Flag, FlagOff, TrendingUp, RectangleVertical} from "lucide-react";
+import TeamMatchesList from "@/app/components/TeamMatches";
+import TeamStatProgression from "@/app/components/TeamStats";
+import TeamInfoCard from "@/app/components/TeamInfo";
 
 export default function PlayerDetailPage() {
   const params = useParams();
@@ -72,155 +70,36 @@ export default function PlayerDetailPage() {
     console.log("Team statis", statistics);
 
   return (
-    <div className="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto my-10 p-6 rounded-lg shadow-md">
       <TeamCard team={team} />
 
-      <h2 className="mt-4 h4 mb-3 text-center">Últimas Partidas do Time</h2>
-      {statistics && (
-        <div className="d-flex flex-wrap justify-content-center gap-3">
-          {statistics.map((statistic) => (
-            <div
-              key={statistic.id}
-              className="bg-light rounded border shadow-sm px-4 py-3 d-flex align-items-center justify-content-center"
-              style={{
-                minWidth: 200,
-                maxWidth: 200,
-                flexDirection: "row",
-                gap: "0.75rem",
-              }}
-            >
-              <Link
-                href={`/team/${statistic.game.home_team.id}`}
-                className="text-decoration-none text-center d-flex flex-column align-items-center"
-              >
-                <Image
-                  src={statistic.game.home_team.photo_url}
-                  alt={statistic.game.home_team.name}
-                  width={40}
-                  height={40}
-                  style={{ objectFit: "contain" }}
-                />
-                <small className="text-muted">
-                  {statistic.game.home_team.name}
-                </small>
-              </Link>
-
-              <div className="fw-bold fs-5 text-secondary">X</div>
-
-              <Link
-                href={`/team/${statistic.game.away_team.id}`}
-                className="text-decoration-none text-center d-flex flex-column align-items-center"
-              >
-                <Image
-                  src={statistic.game.away_team.photo_url}
-                  alt={statistic.game.away_team.name}
-                  width={40}
-                  height={40}
-                  style={{ objectFit: "contain" }}
-                />
-                <small className="text-muted">
-                  {statistic.game.away_team.name}
-                </small>
-              </Link>
-            </div>
-          ))}
+      <div className="row mt-4 g-4">
+        <div className="col-12 col-md-6">
+          {statistics && <TeamMatchesList statistics={statistics} />}
         </div>
-      )}
 
-      <h2 className="h4 mb-3 text-center mt-3">
-        Progressão das Estatísticas do Jogador
-      </h2>
-      <div className="d-flex flex-wrap justify-content-center gap-2">
-        <StatProgression
-          title="Cartões Amarelos"
-          data={yellowCardProgression}
-          icon={<RectangleVertical fill="yellow" color="yellow" />}
-        />
+          <div className="col-12 col-md-6">
+              <TeamInfoCard team={team} />
+          </div>
+      </div>
 
-        <StatProgression
-          title="Cartões Vermelhos"
-          data={redCardProgression}
-          icon={<RectangleVertical fill="red" color="red" />}
-        />
-
-        <StatProgression
-          title="Chutes"
-          data={shotsCardProgression}
-          icon={<GiSoccerKick fill="gray" />}
-        />
-
-        <StatProgression
-          title="Chutes a Gol"
-          data={shotsOnCardProgression}
-          icon={<GiSoccerKick fill="green" />}
-        />
-
-        <StatProgression
-          title="Chutes Fora"
-          data={shotsOffCardProgression}
-          icon={<GiSoccerKick fill="yellow" />}
-        />
-
-        <StatProgression
-          title="Chutes Bloqueados"
-          data={blockedShotsCardProgression}
-          icon={<Ban />}
-        />
-
-        <StatProgression
-          title="Chutes dentro da Área"
-          data={shotsInsideCardProgression}
-          icon={<Inbox />}
-        />
-
-        <StatProgression
-          title="Chutes fura da Área"
-          data={shotsOutsideCardProgression}
-          icon={<Box />}
-        />
-
-        <StatProgression
-          title="Faltas"
-          data={foulsCardProgression}
-          icon={<AlertTriangle color="yellow" />}
-        />
-
-        <StatProgression
-          title="Escanteios"
-          data={cornersCardProgression}
-          icon={<Flag />}
-        />
-
-        <StatProgression
-          title="Impedimentos"
-          data={offsidesCardProgression}
-          icon={<FlagOff fill="orange" />}
-        />
-
-        <StatProgression
-          title="Posse de Bola"
-          data={ballPossessionCardProgression}
-          label="%"
-          icon={<GiSoccerKick fill="blue" />}
-        />
-
-        <StatProgression
-          title="Passes"
-          data={passesCardProgression}
-          icon={<TrendingUp fill="blue" />}
-        />
-
-        <StatProgression
-          title="Precisão Passes"
-          data={accuracyCardProgression}
-          label="%"
-          icon={<TrendingUp fill="blue" />}
-        />
-
-        <StatProgression
-          title="Defesas"
-          data={savesCardProgression}
-          icon={<GiGoalKeeper fill="blue" />}
+      <div style={{ marginTop: "2rem", width: "100%" }}>
+        <TeamStatProgression
+          yellowCardProgression={yellowCardProgression}
+          redCardProgression={redCardProgression}
+          shotsCardProgression={shotsCardProgression}
+          shotsOnCardProgression={shotsOnCardProgression}
+          shotsOffCardProgression={shotsOffCardProgression}
+          blockedShotsCardProgression={blockedShotsCardProgression}
+          shotsInsideCardProgression={shotsInsideCardProgression}
+          shotsOutsideCardProgression={shotsOutsideCardProgression}
+          foulsCardProgression={foulsCardProgression}
+          cornersCardProgression={cornersCardProgression}
+          offsidesCardProgression={offsidesCardProgression}
+          ballPossessionCardProgression={ballPossessionCardProgression}
+          passesCardProgression={passesCardProgression}
+          accuracyCardProgression={accuracyCardProgression}
+          savesCardProgression={savesCardProgression}
         />
       </div>
     </div>

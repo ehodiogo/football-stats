@@ -4,10 +4,11 @@ import Link from "next/link";
 import React from "react";
 
 export default function Navbar() {
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
-        <Link className="navbar-brand fw-bold fs-4" href="/">
+        <Link href="/" className="navbar-brand fw-bold fs-4">
           BetStats
         </Link>
 
@@ -26,17 +27,17 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-lg-center gap-lg-3">
             <li className="nav-item">
-              <Link className="nav-link" href="/players">
+              <Link href="/players" className="nav-link">
                 Jogadores
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/teams">
+              <Link href="/teams" className="nav-link">
                 Times
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/plans">
+              <Link href="/plans" className="nav-link">
                 Planos
               </Link>
             </li>
