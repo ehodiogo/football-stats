@@ -30,20 +30,76 @@ export default function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Usuário"
-      />
-      <input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-        placeholder="Senha"
-      />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit">Entrar</button>
-    </form>
+    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-dark text-light px-3">
+      <div
+        className="card border-0 shadow-lg p-4 w-100"
+        style={{ maxWidth: 420, backgroundColor: "#1f1f1f" }}
+      >
+        <h2 className="text-center mb-4 fw-bold" style={{ color: "#f8f9fa" }}>
+          Bem-vindo de volta
+        </h2>
+        <form onSubmit={handleLogin}>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label text-light">
+              Usuário
+            </label>
+            <input
+              id="username"
+              className="form-control bg-dark text-light border-secondary"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Digite seu usuário"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label text-light">
+              Senha
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="form-control bg-dark text-light border-secondary"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite sua senha"
+              required
+            />
+          </div>
+
+          {error && (
+            <div className="alert alert-danger py-2 small text-center">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="btn btn-outline-light w-100 fw-semibold"
+          >
+            Entrar
+          </button>
+        </form>
+
+        <div className="text-center mt-3">
+          <a href="#" className="text-decoration-none text-secondary small">
+            Esqueci minha senha
+          </a>
+        </div>
+
+        <hr className="border-secondary my-4" />
+
+        <div className="text-center">
+          <span className="small text-muted">Não tem conta? </span>
+          <a
+            href="/register"
+            className="text-decoration-none text-info small fw-semibold"
+          >
+            Crie agora
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }

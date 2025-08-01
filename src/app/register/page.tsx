@@ -11,42 +11,74 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow max-w-md w-full"
+    <div
+      className="d-flex align-items-center justify-content-center bg-dark text-light"
+      style={{ minHeight: "100vh", padding: "20px" }}
+    >
+      <div
+        className="card shadow-lg"
+        style={{
+          width: "100%",
+          maxWidth: "400px",
+          backgroundColor: "#272C32",
+          border: "none",
+        }}
       >
-        <h1 className="text-2xl font-bold mb-4 text-center">Criar Conta</h1>
-        <input
-          type="text"
-          placeholder="Nome"
-          className="w-full mb-4 p-3 border rounded"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-        <input
-          type="email"
-          placeholder="E-mail"
-          className="w-full mb-4 p-3 border rounded"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          className="w-full mb-4 p-3 border rounded"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
-          Cadastrar
-        </button>
-        <div className="mt-4 text-sm text-center">
-          <Link href="/login" className="text-blue-600 hover:underline">
-            Já tenho uma conta
-          </Link>
+        <div className="card-body p-4">
+          <h2 className="card-title text-center mb-4">Criar Conta</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Nome</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Seu nome"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">E-mail</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Seu e-mail"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Senha</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Sua senha"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary w-100">
+              Cadastrar
+            </button>
+          </form>
+
+          <div className="text-center mt-3">
+            <Link href="/login" className="text-decoration-none text-light">
+              Já tenho uma conta
+            </Link>
+            <br />
+            <Link
+              href="/forgot-password"
+              className="text-decoration-none text-secondary"
+            >
+              Esqueci minha senha
+            </Link>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

@@ -11,28 +11,43 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow max-w-md w-full"
+    <div
+      className="container d-flex align-items-center justify-content-center min-vh-100"
+      style={{ backgroundColor: "#272C32" }}
+    >
+      <div
+        className="card shadow-sm p-4"
+        style={{ maxWidth: 400, width: "100%", backgroundColor: "#1f1f1f" }}
       >
-        <h1 className="text-2xl font-bold mb-4 text-center">Recuperar Senha</h1>
-        <input
-          type="email"
-          placeholder="Seu e-mail"
-          className="w-full mb-4 p-3 border rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
-          Enviar
-        </button>
-        <div className="mt-4 text-sm text-center">
-          <Link href="/login" className="text-blue-600 hover:underline">
+        <h1 className="h4 text-center mb-4">Recuperar Senha</h1>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              E-mail
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="form-control"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-dark w-100">
+            Enviar
+          </button>
+        </form>
+
+        <div className="text-center mt-3">
+          <Link href="/login" className="text-decoration-none">
             Voltar ao login
           </Link>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
