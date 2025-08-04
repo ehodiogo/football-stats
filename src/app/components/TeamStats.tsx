@@ -11,6 +11,7 @@ import {
   FlagOff,
   TrendingUp,
 } from "lucide-react";
+import Image from "next/image";
 import { GiSoccerKick, GiGoalKeeper } from "react-icons/gi";
 
 type TeamStatProgressionProps = {
@@ -29,6 +30,8 @@ type TeamStatProgressionProps = {
   passesCardProgression: number[];
   accuracyCardProgression: number[];
   savesCardProgression: number[];
+  teamName?: string;
+  teamLogoUrl?: string;
 };
 
 export default function TeamStatProgression({
@@ -47,6 +50,8 @@ export default function TeamStatProgression({
   passesCardProgression,
   accuracyCardProgression,
   savesCardProgression,
+  teamName,
+  teamLogoUrl,
 }: TeamStatProgressionProps) {
   return (
     <div
@@ -62,8 +67,17 @@ export default function TeamStatProgression({
         flexDirection: "column",
       }}
     >
-      <h2 className="h4 mb-3 text-center mt-3 anton-regular-white">
-        Estatísticas do Time
+      <h2 className="h4 mb-3 text-center mt-3 anton-regular-white flex items-center justify-center gap-2">
+        {teamLogoUrl && (
+          <Image
+            src={teamLogoUrl}
+            alt={`${teamName || "Time"} logo`}
+            width={32}
+            height={32}
+            style={{borderRadius: "50%" }}
+          />
+        )}
+        {teamName || "Estatísticas do Time"}
       </h2>
 
       <div className="d-flex flex-wrap justify-content-center gap-2">

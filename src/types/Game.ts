@@ -2,6 +2,7 @@ import { League } from "./League"
 import { Referee } from "./Referee"
 import { Team } from "./Team"
 import { Venue } from "./Venue"
+import { StatisticsGame } from "./StatisticsGame"
 
 export type Game = {
     id: number;
@@ -13,4 +14,5 @@ export type Game = {
     away_goals: number;
     date: string; // por seguranca deixei stringado
     venue: Venue;
+    statistics: [StatisticsGame]
 }

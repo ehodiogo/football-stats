@@ -1,7 +1,7 @@
 import { PlayerStatistic } from "@/types/PlayerStatistic";
 import Image from "next/image";
 import Link from "next/link";
-
+import { ArrowRight } from 'lucide-react';
 type PlayerMatchesListProps = {
   statistics: PlayerStatistic[];
 };
@@ -59,6 +59,12 @@ export default function PlayerMatchesList({
                   <span className="barlow-condensed-regular-white">
                     {game.league.name}
                   </span>
+                  <Link
+                    href={`/game/${game.id}`}
+                    className="text-sm text-white bg-[#3a3f45] px-2 py-1 rounded hover:bg-[#4a4f55] flex items-center gap-1"
+                  >
+                    Ver partida <ArrowRight size={16} />
+                  </Link>
                 </div>
               )}
 
