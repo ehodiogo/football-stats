@@ -118,55 +118,58 @@ export default function GameDetailPage() {
       <div className="max-w-4xl mx-auto my-10 p-6 rounded-lg shadow-md">
         <GameCard game={game} />
 
-        <div className="row mt-4 g-4">
-          <div className="col-12 col-md-6">
-            {homeStats && (
-              <TeamStatProgression
-                teamName={game.home_team.name}
-                teamLogoUrl={game.home_team.photo_url}
-                yellowCardProgression= {yellowCardProgressionHome}
-                redCardProgression= {redCardProgressionHome}
-                shotsCardProgression={shotsCardProgressionHome}
-                shotsOnCardProgression={shotsOnCardProgressionHome}
-                shotsOffCardProgression={shotsOffCardProgressionHome}
-                blockedShotsCardProgression={blockedShotsCardProgressionHome}
-                shotsInsideCardProgression={shotsInsideCardProgressionHome}
-                shotsOutsideCardProgression={shotsOutsideCardProgressionHome}
-                foulsCardProgression={foulsCardProgressionHome}
-                cornersCardProgression={cornersCardProgressionHome}
-                offsidesCardProgression={offsidesCardProgressionHome}
-                ballPossessionCardProgression={ballPossessionCardProgressionHome}
-                passesCardProgression={passesCardProgressionHome}
-                accuracyCardProgression={accuracyCardProgressionHome}
-                savesCardProgression={savesCardProgressionHome}
-              />
-            )}
-          </div>
+            <div style={{ marginTop: "2rem", width: "100%" }}>
 
-          <div className="col-12 col-md-6">
-            {awayStats && (
-              <TeamStatProgression
-                teamName= {game.away_team.name}
-                teamLogoUrl= {game.away_team.photo_url}
-                yellowCardProgression= {yellowCardProgressionAway}
-                redCardProgression= {redCardProgressionAway}
-                shotsCardProgression={shotsCardProgressionAway}
-                shotsOnCardProgression={shotsOnCardProgressionAway}
-                shotsOffCardProgression={shotsOffCardProgressionAway}
-                blockedShotsCardProgression={blockedShotsCardProgressionAway}
-                shotsInsideCardProgression={shotsInsideCardProgressionAway}
-                shotsOutsideCardProgression={shotsOutsideCardProgressionAway}
-                foulsCardProgression={foulsCardProgressionAway}
-                cornersCardProgression={cornersCardProgressionAway}
-                offsidesCardProgression={offsidesCardProgressionAway}
-                ballPossessionCardProgression={ballPossessionCardProgressionAway}
-                passesCardProgression={passesCardProgressionAway}
-                accuracyCardProgression={accuracyCardProgressionAway}
-                savesCardProgression={savesCardProgressionAway}
-              />
-            )}
-          </div>
-        </div>
+              {homeStats && (
+                <TeamStatProgression
+                  teamName={game.home_team.name}
+                  teamLogoUrl={game.home_team.photo_url}
+                  yellowCardProgression={yellowCardProgressionHome}
+                  redCardProgression={redCardProgressionHome}
+                  shotsCardProgression={shotsCardProgressionHome}
+                  shotsOnCardProgression={shotsOnCardProgressionHome}
+                  shotsOffCardProgression={shotsOffCardProgressionHome}
+                  blockedShotsCardProgression={blockedShotsCardProgressionHome}
+                  shotsInsideCardProgression={shotsInsideCardProgressionHome}
+                  shotsOutsideCardProgression={shotsOutsideCardProgressionHome}
+                  foulsCardProgression={foulsCardProgressionHome}
+                  cornersCardProgression={cornersCardProgressionHome}
+                  offsidesCardProgression={offsidesCardProgressionHome}
+                  ballPossessionCardProgression={
+                    ballPossessionCardProgressionHome
+                  }
+                  passesCardProgression={passesCardProgressionHome}
+                  accuracyCardProgression={accuracyCardProgressionHome}
+                  savesCardProgression={savesCardProgressionHome}
+                />
+              )}
+              </div>
+
+            <div style={{ marginTop: "2rem", width: "100%" }}>
+              {awayStats && (
+                <TeamStatProgression
+                  teamName={game.away_team.name}
+                  teamLogoUrl={game.away_team.photo_url}
+                  yellowCardProgression={yellowCardProgressionAway}
+                  redCardProgression={redCardProgressionAway}
+                  shotsCardProgression={shotsCardProgressionAway}
+                  shotsOnCardProgression={shotsOnCardProgressionAway}
+                  shotsOffCardProgression={shotsOffCardProgressionAway}
+                  blockedShotsCardProgression={blockedShotsCardProgressionAway}
+                  shotsInsideCardProgression={shotsInsideCardProgressionAway}
+                  shotsOutsideCardProgression={shotsOutsideCardProgressionAway}
+                  foulsCardProgression={foulsCardProgressionAway}
+                  cornersCardProgression={cornersCardProgressionAway}
+                  offsidesCardProgression={offsidesCardProgressionAway}
+                  ballPossessionCardProgression={
+                    ballPossessionCardProgressionAway
+                  }
+                  passesCardProgression={passesCardProgressionAway}
+                  accuracyCardProgression={accuracyCardProgressionAway}
+                  savesCardProgression={savesCardProgressionAway}
+                />
+              )}
+              </div>
       </div>
     );
 }

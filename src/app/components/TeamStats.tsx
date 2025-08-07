@@ -74,7 +74,7 @@ export default function TeamStatProgression({
             alt={`${teamName || "Time"} logo`}
             width={32}
             height={32}
-            style={{borderRadius: "50%" }}
+            style={{ borderRadius: "50%" }}
           />
         )}
         {teamName || "Estatísticas do Time"}

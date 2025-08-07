@@ -33,6 +33,7 @@ function StatProgression({
         style={{
           overflowX: "auto",
           paddingBottom: 4,
+          minWidth: 200,
         }}
       >
         {data.map((val, idx) => (
